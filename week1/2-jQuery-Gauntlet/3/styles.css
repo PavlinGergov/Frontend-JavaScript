@@ -1,0 +1,10 @@
+#search-input {
+    width: 500px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#search-button {
+    /*match input-lg*/
+    height: 47px;
+}
