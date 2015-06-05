@@ -151,7 +151,6 @@ var q = new Point(4, 4);
 
 console.log(p.xDec(1));
 console.log(p.getX());
-// console.log(p.y);
 console.log(p.getY());
 console.log(p.equals(q));
 console.log(p.toString());
@@ -196,6 +195,7 @@ robot.moveDown(5);
 console.log(robot.getPosition().toString());
 
 // Simulation of a Pizzeria
+
 // IIFE
 var makeCounter = (function(){
   var i = 0;
