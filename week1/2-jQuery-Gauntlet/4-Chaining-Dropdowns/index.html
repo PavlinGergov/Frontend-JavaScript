@@ -2,18 +2,22 @@
 <html>
 <head>
     <title>Chaining dropdowns</title>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
     <div class="container">
         <p class="lead">Pick a course to list all students. Pick a student, to see his GitHub account.</p>
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-8">
                 <form role="form">
                     <div class="form-group">
                     <label for="course-pick" class="control-label">Course:</label>
                     <select name = "course-pick" class="form-control">
+                            <option disabled selected> -- select course -- </option>
                             <option>Frontend JavaScript</option>
                             <option>Core Java</option>
                             <option>Programming 101</option>
@@ -22,8 +26,7 @@
 
                     <div class="form-group">
                         <label class="control-label">Student:</label>
-                        <select class="form-control">
-                            <option>Should be populated from the server</option>
+                        <select id="students" class="form-control">
                         </select>
                     </div>
                 </form>
@@ -31,13 +34,14 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12">
-                <h2>GitHub for #StudentName# is #GitHubUrl#</h2>
+            <div id="gitHub" class="col-xs-12">
+                    <a id="gitHubLink">
+                        <img id="img" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
+                        <span id="gitLink"></span>
+                    </a>
             </div>
         </div>
     </div>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

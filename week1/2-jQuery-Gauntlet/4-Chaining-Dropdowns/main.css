@@ -1,0 +1,11 @@
+img {
+	width: 50px;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.container {
+	margin-top: 20px;
+}
