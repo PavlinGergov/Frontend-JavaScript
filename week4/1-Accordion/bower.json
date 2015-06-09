@@ -1,0 +1,22 @@
+{
+  "name": "1-Accordion",
+  "version": "0.0.0",
+  "homepage": "https://github.com/PavlinGergov/Frontend-JavaScript",
+  "authors": [
+    "Pavlin Gergov <pgergov92@abv.bg>"
+  ],
+  "description": "First task from week4",
+  "main": "accordion.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "jquery-ui": "~1.11.4"
+  }
+}
