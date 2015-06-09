@@ -23,4 +23,27 @@
   position: relative;
   top: -1px;
 }
-
+.accordion dt a { 
+  margin: 0; 
+  font-size: 1.1em; 
+  padding: 0.4em; 
+  color: #fff; 
+  background-color: #944; 
+  border-bottom: 1px solid #66d; 
+}
+.accordion dt a:hover { 
+  cursor: pointer; 
+}
+.accordion dd { 
+  margin: 0; 
+  padding: 1em 0.4em; 
+  background-color: #eef; 
+  border-bottom: 2px solid #66d; 
+}
+.accordion.hide dt a { 
+  color: #000; 
+  background-color: #88f; 
+}
+.accordion.hide dd { 
+  display: none; 
+}
