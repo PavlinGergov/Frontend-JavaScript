@@ -10,40 +10,58 @@
     <script src="app.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="heading">            
-        </div> 
-
-        <div class="create-students col-xs-9">
-            <input id="name-input" class="form-control" type="text" placeholder="Name">
-            <input id="faculty-number-input" class="form-control" type="text" placeholder="facultyNumber"> 
-            <input id="course-input" class="form-control" type="text" placeholder="Course">   
-            <select id="select-course" class="form-control" placeholder="Course">
-                <option disabled selected> -- select course -- </option>
-                <option id="1">Programming 51</option> 
-                <option id="2">Programming 101</option> 
-                <option id="3">Core Java</option>
-                <option id="4">Frontend JavaScript</option>
-                <option id="5">Haskell</option> 
-                <option id="6">Ruby ruby ruby rubyyyyy</option>  
-                <option id="7">Algorithms</option>          
-            </select> 
-            <button id="create-student" class="btn btn-primary" type="button">Create New Student</button>        
-        </div>
-        <div class="show-students col-xs-9">
-            <dl class="accordion">
-    
-            </dl>
-        </div>
-        <div class="delete-student col-xs-9">
-            <input class="form-control" type="text" placeholder="facultyNumber">
-            <button class="btn btn-primary" type="button">Delete Student</button> 
-        </div>
+    <div class="heading"></div>
+    <div class="table-container col-xs-11">
+        <table id="students-table" class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Faculty Number</th>
+                    <th>Courses</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
     </div>
+    <form class="form-inline">
+        <div class="container col-lg-">
+            <div class="create-students">
+                <input id="name-input" class="form-control" type="text" placeholder="Name">
+                <input id="faculty-number-input" class="form-control" type="text" placeholder="Faculty Number"> 
+                <input id="course-input" class="form-control" type="text" placeholder="Course">   
+                <select id="select-course" class="form-control" placeholder="Course">
+                    <option disabled selected> -- select course -- </option>
+                    <option id="1">Programming 51</option> 
+                    <option id="2">Programming 101</option> 
+                    <option id="3">Core Java</option>
+                    <option id="4">Frontend JavaScript</option>
+                    <option id="5">Haskell</option> 
+                    <option id="6">Ruby ruby ruby rubyyyyy</option>  
+                    <option id="7">Algorithms</option>          
+                </select> 
+                <button id="create-student" class="btn btn-primary" type="button">Create New Student</button>        
+            </div>
+            <div class="update-students">
+                <input id="update-facultyNumber" class="form-control" type="text" placeholder="Faculty Number"> 
+                <input id="update-name" class="form-control" type="text" placeholder="New Name">
+                <input id="update-course" class="form-control" type="text" placeholder="New Courses">   
+                <button id="update-student" class="btn btn-primary" type="button">Update Student</button>        
+            </div>
+            <div class="delete-students">
+                <input id="delete-facultyNumber" class="form-control col-lg-9" type="text" placeholder="Faculty Number">
+                <button id="delete-student" class="btn btn-primary" type="button">Delete Student</button> 
+            </div>
+        </div>
+    </form>
 
     <script id="entry-template" type="text/x-handlebars-template">
-        <dt><a href="">{{name}}</a></dt>
-        <dd>{{facultyNumber}}</dd>
+        <tr>
+            <td>{{name}}</td>
+            <td>{{facultyNumber}}</td>
+            <td>{{courses}}</td>
+        </tr>
     </script>
 
 </body>

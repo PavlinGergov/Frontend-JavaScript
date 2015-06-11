@@ -4,30 +4,52 @@ $(document).ready(function(){
   "use strict";
 
   var students = [];
-  getStudents();
+  getStudents(refreshStudents);
+  getStudents(drawTable);
 
-  $("#select-course").change(function() {
+  $("#select-course").change(addCourse);
+  $("#create-student").click(addStudent);
+  $("#update-student").click(updateStudent);
+  $("#delete-student").click(deleteStudent);
+
+  function refreshStudents(data){
+    students = data;
+  }
+
+  function drawTable(data){
+    $("#students-table > tbody").empty();
+    var source = $("#entry-template").html();
+    var template = Handlebars.compile(source);
+    data.forEach(function(student){
+      var html = template(student);
+      $("#students-table > tbody").append(html);
+    });
+  }
+
+  function addCourse(){
     var course = $("#select-course").val();
     if ($("#course-input").val() !== "") {
       $("#course-input").val($("#course-input").val() + ", " + course);
     } else {
       $("#course-input").val(course);
     }
-  });
+  }
 
-  $("#create-student").click(function(){
-    if (checkInputs()){
-      alert("Please fill all fields.");
-    }
-    var student = {
-      "name": $("#name-input").val(),
-      "facultyNumber": $("#faculty-number-input").val(),
-      "courses": $("#course-input").val().split(", ")
-    };
-    addStudent(student);
-  });
+  function addStudent(){
+    if (!checkInputs(".create-students")){
+      var student = {
+        "name": $("#name-input").val(),
+        "facultyNumber": $("#faculty-number-input").val(),
+        "courses": $("#course-input").val().split(", ")
+      };
+      $("#name-input").val("");
+      $("#faculty-number-input").val("");
+      $("#course-input").val("");
+      createStudent(student);
+      }
+  }
 
-  function addStudent(student){
+  function createStudent(student){
     $.ajax({
       type: "POST",
       url: "http://localhost:3030/student",
@@ -35,61 +57,73 @@ $(document).ready(function(){
       dataType: "json",
       data: JSON.stringify(student)
     })
-      .done(function() {
-        getStudents();
+      .done(function(){
+        getStudents(drawTable);
       })
       .fail(function() {
-        alert("Panic error, run away!");
+        alert("Error! Student was not added!");
       });
   }
 
-  function getStudents(){
+  function getStudents(callBackFunction){
     $.ajax({
       type: "GET",
       url: "http://localhost:3030/students",
       dataType: "json"
-    }).done(function(data) {
-        students = data;
-        createAccordion(data);
-      }).fail(function() {
+    }).done(callBackFunction)
+      .fail(function() {
         alert("Try runing node server.js in the server folder!");
       });
   }
 
-  function addSingleStudentToDom(student){
-    var $dl = $(".accordion");
-    var $a = $("<a></a>");
-    var $dt = $("<dt></dt>");
-    var $dd = $("<dd></dd>");
-    $a.attr("href", "");
-    $a.text(student.name);
-    $dt.append($a);
-    $dl.append($dt);
-    $dd.text("Faculty Number: " + student.facultyNumber + "; Courses: " + student.courses);
-    $dl.append($dd);
-    return $dl;
+  function updateStudent(){
+    var facultyNumber = $("#update-facultyNumber").val();
+    if (!checkInputs(".update-students") && checkForStudent(facultyNumber)){
+        var student = {
+          "name": $("#update-name").val(),
+          "facultyNumber": $("#update-facultyNumber").val(),
+          "courses": $("#update-course").val().split(", ")
+        };
+        $("#update-name").val("");
+        $("#update-facultyNumber").val("");
+        $("#update-course").val("");
+        createStudent(student);
+    }else {
+        alert("No student with this number.");
+      }
   }
 
-  function createAccordion(data){
-    $(".accordion").empty();
-    var source = $("#entry-template").html();
-    var template = Handlebars.compile(source);
-    data.forEach(function(student){
-      console.log(student);
-      var context = student;
-      var html = template(context);
-      console.log(html);
-      $(".accordion").append(html);
-      // addSingleStudentToDom(student);
-    });
-    $(".accordion").accordion();
+  function deleteStudent(){
+    var facultyNumber = $("#delete-facultyNumber").val();
+    if (checkForStudent(facultyNumber)) {
+      $.ajax({
+        type: "DELETE",
+        url: "http://localhost:3030/student/" + facultyNumber,
+      })
+      .done(function() {
+        getStudents(drawTable);
+        $("#delete-facultyNumber").val ("");
+      });
+    } else {
+      alert("No student with this number.");
+    }
   }
 
-  function checkInputs(){
-    return $(".create-students > input").filter(function() {
-      return $(this).val() === "";
+  function checkForStudent(facultyNumber){
+    getStudents(refreshStudents);
+    return students.filter(function(student){
+      return student.facultyNumber === facultyNumber;
     }).length !== 0;
   }
 
+  function checkInputs(cls){
+    var result = $(cls + " > input").filter(function() {
+      return $(this).val() === "";
+    }).length !== 0;
+    if (result) {
+      alert("Please fill all fields.");
+    }
+    return result;
+  }
 });
 

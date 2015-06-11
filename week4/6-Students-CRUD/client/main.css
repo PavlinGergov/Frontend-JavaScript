@@ -1,7 +1,19 @@
-.heading {
-	margin-top: 30px;
+.table-container {
+	margin:50px;
 }
 
-.btn {
-	margin: 5px;
+#students-table {
+	width: 100%;
+}
+
+th, td {
+	text-align: center;
+}
+
+form {
+	margin-bottom: 50px;
+}
+
+div {
+	margin-bottom: 10px;
 }
