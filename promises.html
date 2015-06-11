@@ -1,0 +1,34 @@
+"use strict";
+<script src="bower_components/q/q.js"></script>
+<script type="text/javascript">
+  function makeAsync(timeout) {
+    return function() {
+      var defered = Q.defer();
+
+      setTimeout(function() {
+          defered.resolve(timeout);
+      }, timeout);
+
+      return defered.promise;
+    }
+  }
+
+  function cb(timeout) {
+    console.log("Done with timeout of " + timeout);
+    return 42;
+  }
+  
+
+  //var asyncFunctions = [1000, 2000, 3000].map(makeAsync);
+  //var f1 = asyncFunctions[0], f2 = asyncFunctions[1], f3 = asyncFunctions[2];
+  
+  var f1 = makeAsync(1000), f2 = makeAsync(2000), f3 = makeAsync(3000);
+  
+  f1()
+    .then(cb)
+    .then(function(arg) { console.log(arg); })
+    .then(f2)
+    .then(cb)
+    .then(f3)
+    .then(cb)
+</script>
