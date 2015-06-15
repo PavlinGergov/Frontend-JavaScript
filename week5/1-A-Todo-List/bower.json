@@ -1,0 +1,21 @@
+{
+  "name": "1-A-Todo-List",
+  "version": "0.0.0",
+  "homepage": "https://github.com/PavlinGergov/Frontend-JavaScript",
+  "authors": [
+    "Pavlin Gergov <pgergov92@abv.bg>"
+  ],
+  "description": "first task from week5",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.4"
+  }
+}

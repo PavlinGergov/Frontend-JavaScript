@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="app.js"></script>
+	<title>A Todo List</title>
+</head>
+<body>
+	<div class="content-container">
+		<div class="buttons-container">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTaskModal">
+				Add a new task
+			</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingsModal">
+				Settings
+			</button>
+		</div>
+	</div>
+
+	<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModal" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title" id="myModalLabel">Add a new task</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<form>
+						Title: <input type="text" name="title"><br>
+						Deadline: <input type="date" name="bday"><br>
+						Starred: <input type="radio" name="starred" value="true">True
+						<input type="radio" name="starred" value="false">False<br>
+						<textarea name="big-text"></textarea>
+	            	</form>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button type="button" class="btn btn-primary">Save changes</button>
+	        </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title" id="myModalLabel">User settings</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<form>
+	            		Pick color for your background: <input type="color" name="favcolor"><br>
+						Username: <input type="text" name="username"><br>
+						Choose your profile picture: <input type="file" name="pic" accept="image/*">
+	            	</form>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button type="button" class="btn btn-primary">Save changes</button>
+	        </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>
