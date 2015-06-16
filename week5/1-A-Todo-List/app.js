@@ -2,8 +2,8 @@
 
 $(document).ready(function(){
   "use strict";
-  $("#myModal").on("shown.bs.modal", function () {
-    $("#myInput").focus();
-  });
+  // How to change background color
+  // $(".content-container").css("background-color", $("input[name=backgroundColor]").val());
+
 });
 

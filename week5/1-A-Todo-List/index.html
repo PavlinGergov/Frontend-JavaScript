@@ -9,61 +9,124 @@
 	<title>A Todo List</title>
 </head>
 <body>
-	<div class="content-container">
-		<div class="buttons-container">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTaskModal">
-				Add a new task
-			</button>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingsModal">
-				Settings
-			</button>
+	<div class="main-container">
+		<div class="content-container col-md-9">
+			<div class="buttons-container">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTaskModal">
+					Add a new task
+				</button>
+			</div>
+			<div class="table-container">
+		        <table id="tasksTable" class="table table-bordered">
+		            <thead>
+		                <tr>
+		                    <th>Task</th>
+		                    <th>Date</th>
+		                    <th>Stared</th>
+		                    <th>Options</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		            	<tr>
+		            		<td>asd</td>
+		            		<td>asd</td>
+		            		<td>asd</td>
+		            		<td class="options">
+								<button type="button" class="options-button btn btn-sm btn-primary" data-toggle="modal" data-target="#descriptionModal">More Info</button>
+		            		</td>
+		            	</tr>
+		            	<tr>
+		            		<td>asd</td>
+		            		<td>asd</td>
+		            		<td>asd</td>
+		            		<td>asd</td>
+		            	</tr>
+		            </tbody>
+		        </table>		
+			</div>
 		</div>
-	</div>
+		<div class="user-container col-md-3">
+			<div class="profile-picture">
+				<img src="http://images4.fanpop.com/image/photos/19400000/Purple-fairy-fantasy-19422648-500-461.jpg">
+			</div>
+			<div class="greeting-message">
+				<div class="col-md-3"></div>
+				<p class="col-md-6">Hello Ivo</p>
+				<div class="col-md-3"></div>
+			</div>
+			<div class="profile-settings">
+				<div class="col-md-3"></div>
+				<button type="button" class="profile-button btn btn-sm btn-primary col-md-6" data-toggle="modal" data-target="#settingsModal">
+					User Settings
+				</button>
+				<div class="col-md-3"></div>
+			</div>
+		</div>			
 
-	<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModal" aria-hidden="true">
-	    <div class="modal-dialog">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	            <h4 class="modal-title" id="myModalLabel">Add a new task</h4>
-	            </div>
-	            <div class="modal-body">
-	            	<form>
-						Title: <input type="text" name="title"><br>
-						Deadline: <input type="date" name="bday"><br>
-						Starred: <input type="radio" name="starred" value="true">True
-						<input type="radio" name="starred" value="false">False<br>
-						<textarea name="big-text"></textarea>
-	            	</form>
-	            </div>
-	            <div class="modal-footer">
-	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	                <button type="button" class="btn btn-primary">Save changes</button>
-	        </div>
-	    </div>
-	  </div>
-	</div>
+		<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModal" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		            <h4 class="modal-title" id="myModalLabel">Add a new task</h4>
+		            </div>
+		            <div class="modal-body">
+		            	<form>
+							Title: <input type="text" name="title"><br>
+							Deadline: <input type="date" name="bday"><br>
+							Stared: <input type="radio" name="stared" value="true">True
+							<input type="radio" name="stared" value="false">False<br>
+							Description: <br>
+							<textarea name="big-text"></textarea>
+		            	</form>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		                <button type="button" class="btn btn-primary">Save changes</button>
+		        </div>
+		    </div>
+		  </div>
+		</div>
 
-	<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true">
-	    <div class="modal-dialog">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	            <h4 class="modal-title" id="myModalLabel">User settings</h4>
-	            </div>
-	            <div class="modal-body">
-	            	<form>
-	            		Pick color for your background: <input type="color" name="favcolor"><br>
-						Username: <input type="text" name="username"><br>
-						Choose your profile picture: <input type="file" name="pic" accept="image/*">
-	            	</form>
-	            </div>
-	            <div class="modal-footer">
-	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	                <button type="button" class="btn btn-primary">Save changes</button>
-	        </div>
-	    </div>
-	  </div>
+		<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		            <h4 class="modal-title" id="myModalLabel">User settings</h4>
+		            </div>
+		            <div class="modal-body">
+		            	<form>
+		            		Pick color for your background: <input type="color" name="backgroundColor"><br>
+							Username: <input type="text" name="username"><br>
+							Choose your profile picture: <input type="file" name="pic" accept="image/*">
+		            	</form>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		                <button type="button" class="btn btn-primary">Save changes</button>
+		        </div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModal" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		            <h4 class="modal-title" id="myModalLabel">Task description</h4>
+		            </div>
+		            <div class="modal-body">
+		            	<form>
+							<h2>Lorem ipsum dolor sit amet, in perfecto voluptaria mea, vim ea utinam prompta, vim ut error convenire. Sit et primis tritani imperdiet, no aperiri nostrud pericula vix, id per tota integre. Volumus theophrastus te quo. Quando aliquando at sit, justo tollit te pro.</h2>
+		            	</form>
+		            </div>
+		            <div class="modal-footer">
+		        	</div>
+		    	</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
