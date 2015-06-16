@@ -5,11 +5,13 @@
     <link rel="stylesheet" href="main.css">
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="bower_components/handlebars/handlebars.js"></script>
+    <script type="text/javascript" src="jquery-sortable.js"></script>
     <script src="app.js"></script>
 	<title>A Todo List</title>
 </head>
 <body>
-	<div class="main-container">
+	<div class="main-container row">
 		<div class="content-container col-md-9">
 			<div class="buttons-container">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newTaskModal">
@@ -20,38 +22,25 @@
 		        <table id="tasksTable" class="table table-bordered">
 		            <thead>
 		                <tr>
+		                    <th>Stared</th>
 		                    <th>Task</th>
 		                    <th>Date</th>
-		                    <th>Stared</th>
-		                    <th>Options</th>
+		                    <th>Description</th>
+		                    <th>Status</th>
 		                </tr>
 		            </thead>
 		            <tbody>
-		            	<tr>
-		            		<td>asd</td>
-		            		<td>asd</td>
-		            		<td>asd</td>
-		            		<td class="options">
-								<button type="button" class="options-button btn btn-sm btn-primary" data-toggle="modal" data-target="#descriptionModal">More Info</button>
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<td>asd</td>
-		            		<td>asd</td>
-		            		<td>asd</td>
-		            		<td>asd</td>
-		            	</tr>
 		            </tbody>
 		        </table>		
 			</div>
 		</div>
 		<div class="user-container col-md-3">
 			<div class="profile-picture">
-				<img src="http://images4.fanpop.com/image/photos/19400000/Purple-fairy-fantasy-19422648-500-461.jpg">
+				<img src="">
 			</div>
 			<div class="greeting-message">
 				<div class="col-md-3"></div>
-				<p class="col-md-6">Hello Ivo</p>
+				<p class="col-md-6">Hello User</p>
 				<div class="col-md-3"></div>
 			</div>
 			<div class="profile-settings">
@@ -62,71 +51,90 @@
 				<div class="col-md-3"></div>
 			</div>
 		</div>			
+	</div>
+	<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModal" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title" id="myModalLabel">Add a new task</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<form>
+						Title: <input type="text" name="title"><br>
+						Deadline: <input type="date" name="deadline"><br>
+						Options: <br>
+						<textarea name="discription"></textarea>
+	            	</form>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button id="addTask" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+	        </div>
+	    </div>
+	  </div>
+	</div>
 
-		<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModal" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		            <h4 class="modal-title" id="myModalLabel">Add a new task</h4>
-		            </div>
-		            <div class="modal-body">
-		            	<form>
-							Title: <input type="text" name="title"><br>
-							Deadline: <input type="date" name="bday"><br>
-							Stared: <input type="radio" name="stared" value="true">True
-							<input type="radio" name="stared" value="false">False<br>
-							Description: <br>
-							<textarea name="big-text"></textarea>
-		            	</form>
-		            </div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                <button type="button" class="btn btn-primary">Save changes</button>
-		        </div>
-		    </div>
-		  </div>
-		</div>
+	<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title" id="myModalLabel">User settings</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<form>
+	            		Pick color for your background: <input type="color" name="backgroundColor"><br>
+						Username: <input type="text" name="username"><br>
+						Choose your profile picture: <input type="text" name="pic">
+	            	</form>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button id="changeProfileSettings" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+	        </div>
+	    </div>
+	  </div>
+	</div>
 
-		<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModal" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		            <h4 class="modal-title" id="myModalLabel">User settings</h4>
-		            </div>
-		            <div class="modal-body">
-		            	<form>
-		            		Pick color for your background: <input type="color" name="backgroundColor"><br>
-							Username: <input type="text" name="username"><br>
-							Choose your profile picture: <input type="file" name="pic" accept="image/*">
-		            	</form>
-		            </div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                <button type="button" class="btn btn-primary">Save changes</button>
-		        </div>
-		    </div>
-		  </div>
-		</div>
-
-		<div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModal" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-		            <div class="modal-header">
-		            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		            <h4 class="modal-title" id="myModalLabel">Task description</h4>
-		            </div>
-		            <div class="modal-body">
-		            	<form>
-							<h2>Lorem ipsum dolor sit amet, in perfecto voluptaria mea, vim ea utinam prompta, vim ut error convenire. Sit et primis tritani imperdiet, no aperiri nostrud pericula vix, id per tota integre. Volumus theophrastus te quo. Quando aliquando at sit, justo tollit te pro.</h2>
-		            	</form>
-		            </div>
-		            <div class="modal-footer">
-		        	</div>
-		    	</div>
-			</div>
+	<div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModal" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title" id="myModalLabel">Task description</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<form>
+						<h2 class="description-header"></h2>
+	            	</form>
+	            </div>
+	            <div class="modal-footer">
+	        	</div>
+	    	</div>
 		</div>
 	</div>
+
+	<!-- </div> -->
+    <script id="tasks-template" type="text/x-handlebars-template">
+        <tr>
+            <td class="staredTd">
+				<button type="button" name="{{title}}" class="star-button btn btn-default btn-sm" aria-label="Left Align">
+				  <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+				</button>
+            </td>
+            <td>{{title}}</td>
+            <td>{{deadline}}</td>
+    		<td class="description">
+				<button type="button" class="load-modal btn btn-sm btn-primary" data-toggle="modal" data-target="#descriptionModal" task-description="{{description}}">More Info</button>
+				<button type="button" class="remove-task btn btn-sm btn-primary" name="{{title}}">Remove task</button>
+    		</td>
+            <td class="status">
+				<button type="button" name="{{title}}" class="status-button btn btn-danger btn-sm" aria-label="Left Align">
+				  <span class="taskStatus glyphicon glyphicon-remove" aria-hidden="true"></span>
+				</button>
+            </td>   		
+        </tr>
+    </script>
 </body>
 </html>

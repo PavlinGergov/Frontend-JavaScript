@@ -2,29 +2,45 @@
 	margin: 10px;
 }
 
+.modal-body > form > input, textarea {
+	margin: 5px;
+	border-radius: 8px;
+}
+
+.status {
+	text-align: center;
+}
+
+.staredTd {
+	text-align: center;
+}
+
+th {
+	text-align: center;
+}
+
 .table-container {
 	margin: 10px;
 }
 
-.options {
+.description {
 	text-align:center;
 }
 
 .modal-title {
 	text-align: center;
 }
-/*.options-button {
-	margin-left:auto;
-	margin-right:auto;
-}*/
 
 .profile-picture {
 	margin: 20px;
+	text-align: center;
 }
 
 img {
 	max-width:100%;
 	max-height:100%;
+	border: 1px solid gray;
+	border-radius: 8px;
 }
 
 .user-info-container {
@@ -32,10 +48,6 @@ img {
 	display: block;
 }
 
-/*.profile-settings {
-	float: right;
-}
-*/
 .profile-settings {
 	margin: 5px;
 	display: 
@@ -46,6 +58,6 @@ img {
 }
 
 p {
-	border-radius: 5%;
+	border-radius: 9%;
 	border: 1px solid black;
 }
