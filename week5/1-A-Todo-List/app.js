@@ -10,21 +10,9 @@ $(document).ready(function(){
     tasks = [];
   }
   createInitialSettings();
-  // Add on click for buttons
+  addOnClicks();
   $("#addTask").click(addTask);
   $("#changeProfileSettings").click(changeSettings);
-  $(".star-button").click(function(){
-    $(this).toggleClass("btn-warning");
-    changeStatus($(this).attr("name"), "stared");
-  });
-  $(".status-button").click(function(){
-    $(this).toggleClass("btn-danger btn-success");
-    $(this).find(".taskStatus").toggleClass("glyphicon-remove glyphicon-ok");
-    changeStatus($(this).attr("name"), "status");
-  });
-  $(".remove-task").click(function(){
-    removeTask($(this));
-  });
 
   // Change the stared or status fields and save the info to localStorage
   function changeStatus(title, key){
@@ -75,9 +63,25 @@ $(document).ready(function(){
       var html = template(task);
       $("#tasksTable > tbody").append(html);
     });
+    addOnClicks();
+  }
+
+  function addOnClicks(){
     $(".load-modal").click(function(){
       $(".description-header").empty();
       $(".description-header").text($(this).attr("task-description"));
+    });
+    $(".star-button").click(function(){
+      $(this).toggleClass("btn-warning");
+      changeStatus($(this).attr("name"), "stared");
+    });
+    $(".status-button").click(function(){
+      $(this).toggleClass("btn-danger btn-success");
+      $(this).find(".taskStatus").toggleClass("glyphicon-remove glyphicon-ok");
+      changeStatus($(this).attr("name"), "status");
+    });
+    $(".remove-task").click(function(){
+      removeTask($(this));
     });
   }
 
