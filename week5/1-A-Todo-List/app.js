@@ -4,7 +4,11 @@ $(document).ready(function(){
   "use strict";
   // Get the info, draw the table and create the settings
   var tasks = JSON.parse(localStorage.getItem("tasks"));
-  drawTable();
+  if (localStorage.getItem("tasks") !== null) {
+    drawTable();
+  } else {
+    tasks = [];
+  }
   createInitialSettings();
   // Add on click for buttons
   $("#addTask").click(addTask);
