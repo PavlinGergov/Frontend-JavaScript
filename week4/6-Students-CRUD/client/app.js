@@ -78,7 +78,9 @@ $(document).ready(function(){
 
   function updateStudent(){
     var facultyNumber = $("#update-facultyNumber").val();
-    if (!checkInputs(".update-students") && checkForStudent(facultyNumber)){
+
+    checkForStudent(facultyNumber, function(result) {
+      if (!checkInputs(".update-students") && result) {
         var student = {
           "name": $("#update-name").val(),
           "facultyNumber": $("#update-facultyNumber").val(),
@@ -88,32 +90,39 @@ $(document).ready(function(){
         $("#update-facultyNumber").val("");
         $("#update-course").val("");
         createStudent(student);
-    }else {
-        alert("No student with this number.");
+      } else {
+          alert("No student with this number.");
       }
+    });
   }
 
   function deleteStudent(){
     var facultyNumber = $("#delete-facultyNumber").val();
-    if (checkForStudent(facultyNumber)) {
-      $.ajax({
-        type: "DELETE",
-        url: "http://localhost:3030/student/" + facultyNumber,
-      })
-      .done(function() {
-        getStudents(drawTable);
-        $("#delete-facultyNumber").val ("");
-      });
-    } else {
-      alert("No student with this number.");
-    }
+
+    checkForStudent(facultyNumber, function(result) {
+      if(result) {
+        $.ajax({
+          type: "DELETE",
+          url: "http://localhost:3030/student/" + facultyNumber,
+        })
+        .done(function() {
+          getStudents(drawTable);
+          $("#delete-facultyNumber").val ("");
+        });
+      } else {
+        alert("No student with this number.");
+
+      }
+    });
   }
 
-  function checkForStudent(facultyNumber){
-    getStudents(refreshStudents);
-    return students.filter(function(student){
-      return student.facultyNumber === facultyNumber;
-    }).length !== 0;
+  function checkForStudent(facultyNumber, cb){
+    getStudents(function(data) {
+      refreshStudents(data);
+      cb(students.filter(function(student){
+        return student.facultyNumber === facultyNumber;
+      }).length !== 0);
+    });
   }
 
   function checkInputs(cls){
