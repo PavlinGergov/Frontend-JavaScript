@@ -10,7 +10,6 @@ $(document).ready(function(){
     tasks = [];
   }
   createInitialSettings();
-  addOnClicks();
   $("#addTask").click(addTask);
   $("#changeProfileSettings").click(changeSettings);
 
